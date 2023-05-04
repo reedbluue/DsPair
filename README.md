@@ -53,12 +53,20 @@ Os estados do programa são disponibilizados por meio dos status de saída da ex
 
 #### Status de falha
 
-- Dispositivo pareado - `1`
-- Dispositivo despareado - `2`
-- Todos os dispositivos encontrados foram pareados - `3`
-- Dispositivos encontrados parcialmente pareados - `4`
-- Todos os dispositivos despareados - `5`
-- Dispositivos parcialmente despareados - `6`
+- Erro Fatal - `-1`
+- Flag inválida - `-2`
+- Modo Inválido - `-3`
+- Modo não inserido - `-4`
+- Faltam argumentos - `-5`
+- Falha ao escanear os dispositivos bluetooth - `-6`
+- Dispositivo bluetooth não encontrado - `-7`
+- Falha ao iniciar o serviço HID - `-8`
+- Falha ao parear o dispositivo - `-9`
+- Falha ao desparear o dispositivo - `-10`
+- Falha aoa atualizar informações do dispositivo - `-11`
+- Sem dispositivos pareados - `-12`
+- Dispositivo não está pareado - `-13`
+- Falha ao retornar dispositivos já pareados - `-14`
 
 ## 🤝 Reconhecimentos aos colaboradores
 
