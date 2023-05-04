@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "DsPair": {
+      "commandName": "Project",
+      "commandLineArgs": "-a"
+    }
+  }
+}
