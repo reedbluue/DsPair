@@ -13,60 +13,24 @@ De forma simples e direta, você pode parear e desparear controles próximos ou 
 
 - [x] Parear via MAC Address
 - [x] Desparear via MAC Address
-- [x] Parear todos os dispositivos compatíveis próximos
-- [x] Desparear todos os dispositivos compatíveis já pareados
+- [x] Listar todos os dispositivos compatíveis próximos
+- [x] Listar todos os dispositivos compatíveis já pareados
 
 ### Ajustes e melhorias
 
 O projeto ainda está em desenvolvimento e próximas atualizações serão voltadas nos seguintes recursos:
 
-- [ ] Retornar lista de dispositivos encontrados (definindo melhor solução para expor esses dados; talvez API?)
-- [ ] Retornar a lista de dispositivos já pareados
 - [ ] Bugs menores...
 
 ## ☕ Usando o DSPair
 
 Para utilizar o DSPair, você precisa iniciar o seu executável (disposnível em sua pasta `./bin`).
-Note que a aplicação se baseia em modos de execução e é necessário entrar com informações via argumento.
-Os estados do programa são disponibilizados por meio dos status de saída da execução da aplicação.
+Note que a aplicação se baseia em API Rest e é necessário acessar seus end-points para executar as suas funcionalidades.
 
-### Comandos do chat
+### End-points
 
-> `DsPair.exe -a` - Busca todos os dispositivos compatíveis e realiza o pareamento de cada um.
-
-> `DsPair.exe -c` - Busca todos os dispositivos já pareados compatíveis e realiza o despareamento de cada um.
-
-> `DsPair.exe -p 'MAC ADDRESS AQUI'` - Pareia um dispositivo compatível a partir de seu endereço MAC.
-
-> `DsPair.exe -u 'MAC ADDRESS AQUI'` - Despareia um dispositivo compatível a partir de seu endereço MAC.
-
-### Status de saída
-
-#### Status de sucesso
-
-- Dispositivo pareado - `1`
-- Dispositivo despareado - `2`
-- Todos os dispositivos encontrados foram pareados - `3`
-- Dispositivos encontrados parcialmente pareados - `4`
-- Todos os dispositivos despareados - `5`
-- Dispositivos parcialmente despareados - `6`
-
-#### Status de falha
-
-- Erro Fatal - `-1`
-- Flag inválida - `-2`
-- Modo Inválido - `-3`
-- Modo não inserido - `-4`
-- Faltam argumentos - `-5`
-- Falha ao escanear os dispositivos bluetooth - `-6`
-- Dispositivo bluetooth não encontrado - `-7`
-- Falha ao iniciar o serviço HID - `-8`
-- Falha ao parear o dispositivo - `-9`
-- Falha ao desparear o dispositivo - `-10`
-- Falha aoa atualizar informações do dispositivo - `-11`
-- Sem dispositivos pareados - `-12`
-- Dispositivo não está pareado - `-13`
-- Falha ao retornar dispositivos já pareados - `-14`
+Os end-points estão documentados utilizando o Swagger. Para obter a lista, basta acessar acessar a seguinte url a partir de seu navegador:
+> `http://localhost:5000/swagger` - considerando a porta padrão e ambiente local
 
 ## 🤝 Reconhecimentos aos colaboradores
 

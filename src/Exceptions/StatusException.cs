@@ -1,11 +1,9 @@
-﻿using DsPair.src.Enums;
+﻿using System.Net;
 
 namespace DsPair.src.Exceptions;
-class StatusException : Exception
-{
-    public ErrorStatus status;
-    public StatusException(ErrorStatus status = ErrorStatus.FatalError)
-    {
-        this.status = status;
-    }
+public class StatusException: Exception {
+  public HttpStatusCode statusCode;
+  public StatusException(string message, HttpStatusCode statusCode = HttpStatusCode.InternalServerError) : base(message) {
+    this.statusCode = statusCode;
+  }
 }

@@ -1,46 +1,36 @@
-﻿using DsPair.src.Controllers;
-using DsPair.src.Enums;
-using DsPair.src.Exceptions;
-using DsPair.src.Helpers;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
 
-namespace DsPair.src;
+var builder = WebApplication.CreateBuilder(args);
 
-public class Program
-{
-    public static int Main(string[] args)
-    {
-        try
-        {
-            if (args.Length < 1) throw new StatusException(ErrorStatus.MissingMode);
-
-            ProgramMode mode = FlagHelper.GetProgramMode(args[0]);
-
-            if (mode == ProgramMode.PairAllNearbyDs)
-            {
-                return (int)BtController.pairAllDs();
-            }
-            else if (mode == ProgramMode.PairFromMac)
-            {
-                return (int)BtController.pairDsFromMac(args);
-            }
-            else if (mode == ProgramMode.UnpairAll)
-            {
-                return (int)BtController.unpairAllDs();
-            }
-            else if (mode == ProgramMode.UnpairFromMac)
-            {
-                return (int)BtController.unpairDsFromMac(args);
-            }
-            else
-            {
-                return (int)ErrorStatus.FatalError;
-            }
-
-        }
-        catch (StatusException e)
-        {
-            Console.WriteLine(Enum.GetName(typeof(ErrorStatus), e.status).ToString());
-            return (int)e.status;
-        }
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(options => {
+  options.SwaggerDoc("v1", new OpenApiInfo {
+    Version = "v1",
+    Title = "DsPair",
+    Description = "Conecte seu DualShock 4 com facilidade ao Windows.",
+    Contact = new OpenApiContact {
+      Name = "GitHub",
+      Url = new Uri("https://github.com/reedbluue/DsPair")
+    },
+    License = new OpenApiLicense {
+      Name = "Apache License",
+      Url = new Uri("https://github.com/reedbluue/DsPair/blob/master/LICENSE")
     }
-}
+  });
+
+  var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+  options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+});
+
+var app = builder.Build();
+
+app.UseExceptionHandler("/error");
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
+app.MapControllers();
+
+app.Run();
