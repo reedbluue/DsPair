@@ -56,7 +56,7 @@ class DsService {
       throw new StatusException("Fail on hid service start", System.Net.HttpStatusCode.InternalServerError);
     }
 
-    Thread.Sleep(5000);
+    Thread.Sleep(3000);
 
     for(int i = 0; i < 5; i++) {
       if(_checkIfServiceHasStarted(device)) return;
@@ -70,7 +70,7 @@ class DsService {
     bool res = BluetoothSecurity.RemoveDevice(device.DeviceAddress);
     if(!res) throw new StatusException("Bluetooth unpair failed", System.Net.HttpStatusCode.InternalServerError);
 
-    Thread.Sleep(5000);
+    Thread.Sleep(3000);
 
     for(int i = 0; i < 5; i++) {
       if(!_checkIfServiceHasStarted(device)) {
