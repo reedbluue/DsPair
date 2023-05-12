@@ -34,14 +34,14 @@ class DsService {
 
   public BluetoothDeviceInfo searchDeviceByMacAddress(string mac) {
     string macAddress = mac.Trim().Replace("-", "").Replace(":", "");
-    BluetoothDeviceInfo device = searchAllDevices().Find(d => d.DeviceAddress.ToString().Equals(macAddress)); ;
+    BluetoothDeviceInfo device = searchAllDevices().Find(d => d.DeviceAddress.ToString().Equals(macAddress.ToUpper())); ;
     if(device == default) throw new StatusException("Bluetooth device not finded.", System.Net.HttpStatusCode.NotFound);
     return device;
   }
 
   public BluetoothDeviceInfo getCachedDeviceByMacAddress(string mac) {
     string macAddress = mac.Trim().Replace("-", "").Replace(":", "");
-    BluetoothDeviceInfo device = getAllPairedDevices().Find(d => d.DeviceAddress.ToString().Equals(macAddress));
+    BluetoothDeviceInfo device = getAllPairedDevices().Find(d => d.DeviceAddress.ToString().Equals(macAddress.ToUpper()));
     if(device == default) throw new StatusException("Device is not paired.", System.Net.HttpStatusCode.NotFound);
     return device;
   }

@@ -30,7 +30,7 @@ Note que a aplicação se baseia em API Rest e é necessário acessar seus end-p
 ### End-points
 
 Os end-points estão documentados utilizando o Swagger. Para obter a lista, basta acessar acessar a seguinte url a partir de seu navegador:
-> `http://localhost:5000/swagger` - considerando a porta padrão e ambiente local
+> `http://localhost:5000/swagger` - considerando a porta padrão e ambiente local || SOMENTE AMBIENTE DE DESENVOLVIMENTO
 
 ## 🤝 Reconhecimentos aos colaboradores
 
