@@ -9,6 +9,13 @@ class DsService {
   private readonly BluetoothClient _client = new BluetoothClient();
   private readonly Guid _hidGuid = new Guid("00001124-0000-1000-8000-00805f9b34fb");
 
+  public Boolean isAdapterOn() {
+    try {
+      if(!BluetoothRadio.Default.Mode.Equals(RadioMode.PowerOff)) return true;
+    } catch { return false; }
+    return false;
+  }
+
   public List<BluetoothDeviceInfo> searchAllDevices() {
     List<BluetoothDeviceInfo> devices;
 

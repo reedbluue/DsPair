@@ -1,4 +1,5 @@
-﻿using DsPair.src.Models;
+﻿using DsPair.src.Exceptions;
+using DsPair.src.Models;
 using DsPair.src.Services;
 using InTheHand.Net.Sockets;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,14 @@ public class DsBluetoothController: ControllerBase {
   private readonly DsService _service = new();
 
   /// <summary>
+  /// Retorna o estado atual do adaptador bluetooth
+  /// </summary>
+  [HttpGet("on")]
+  public Boolean Get() {
+    return _service.isAdapterOn();
+  }
+
+  /// <summary>
   /// Retorna uma lista de controles próximos ou pareados
   /// </summary>
   /// <param name="paired">
@@ -21,6 +30,8 @@ public class DsBluetoothController: ControllerBase {
   /// </param>
   [HttpGet]
   public List<BTDevice> Get([Required] bool paired = false) {
+    if(!_service.isAdapterOn())
+      throw new StatusException("The adaptor is off.", System.Net.HttpStatusCode.InternalServerError);
     if(!paired) {
       List<BluetoothDeviceInfo> devices = _service.searchAllDevices();
       return devices.Select(d => new BTDevice(d)).ToList();
@@ -42,6 +53,8 @@ public class DsBluetoothController: ControllerBase {
   /// </param>
   [HttpPost]
   public BTDevice Post([Required] string macAddress, [Required] bool pair) {
+    if(!_service.isAdapterOn())
+      throw new StatusException("The adaptor is off.", System.Net.HttpStatusCode.InternalServerError);
     if(pair) {
       BluetoothDeviceInfo device = _service.searchDeviceByMacAddress(macAddress);
       _service.pairDevice(device);
