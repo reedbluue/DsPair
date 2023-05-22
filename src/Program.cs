@@ -1,5 +1,8 @@
+using DsPair.src.Services;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+
+DsService.getInstance();
 
 var builder = WebApplication.CreateBuilder(args);
 

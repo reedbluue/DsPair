@@ -11,7 +11,7 @@ namespace DsPair.src.Controllers;
 [ApiController]
 public class DsBluetoothController: ControllerBase {
 
-  private readonly DsService _service = new();
+  private readonly DsService _service = DsService.getInstance();
 
   /// <summary>
   /// Retorna o estado atual do adaptador bluetooth
@@ -60,7 +60,6 @@ public class DsBluetoothController: ControllerBase {
       _service.pairDevice(device);
       return new BTDevice(device);
     } else {
-      DsService _service = new DsService();
       BluetoothDeviceInfo device = _service.getCachedDeviceByMacAddress(macAddress);
       _service.unpairDevice(device);
       return new BTDevice(device);
