@@ -95,43 +95,10 @@ class DsService {
     } catch {
       throw new StatusException("Fail on hid service start", System.Net.HttpStatusCode.InternalServerError);
     }
-
-    Thread.Sleep(3000);
-
-    for(int i = 0; i < 5; i++) {
-      if(_checkIfServiceHasStarted(device)) return;
-      Thread.Sleep(1000);
-    }
-
-    throw new StatusException("Bluetooth pair failed", System.Net.HttpStatusCode.InternalServerError);
   }
 
   public void unpairDevice(BluetoothDeviceInfo device) {
     bool res = BluetoothSecurity.RemoveDevice(device.DeviceAddress);
     if(!res) throw new StatusException("Bluetooth unpair failed", System.Net.HttpStatusCode.InternalServerError);
-
-    Thread.Sleep(3000);
-
-    for(int i = 0; i < 5; i++) {
-      if(!_checkIfServiceHasStarted(device)) {
-        Thread.Sleep(1000);
-        return;
-      }
-    }
-
-    throw new StatusException("Bluetooth unpair failed.", System.Net.HttpStatusCode.InternalServerError);
-  }
-
-  private bool _checkIfServiceHasStarted(BluetoothDeviceInfo device) {
-    try {
-      device.Refresh();
-    } catch {
-      throw new StatusException("Fail on bluetooth device update.", System.Net.HttpStatusCode.InternalServerError);
-    }
-
-    List<Guid> servicos = device.InstalledServices.ToList().Where(guid => guid.Equals(_hidGuid)).ToList();
-
-    if(servicos.Count > 0) return true;
-    return false;
   }
 };
